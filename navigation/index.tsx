@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import { Feather, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,10 +16,11 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/MylistScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
-import LinkingConfiguration from './LinkingConfiguration';
 import MylistScreen from '../screens/MylistScreen';
 import MoreScreen from '../screens/MoreScreen';
+import { HomeStackParamList, HomeTabParamList, RootTabScreenProps } from '../types';
+import LinkingConfiguration from './LinkingConfiguration';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -35,17 +36,17 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
  * A root stack navigator is often used for displaying modals on top of all other content.
  * https://reactnavigation.org/docs/modal
  */
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
-    </Stack.Navigator>
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <HomeStack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <HomeStack.Group screenOptions={{ presentation: 'modal' }}>
+        <HomeStack.Screen name="Modal" component={ModalScreen} />
+      </HomeStack.Group>
+    </HomeStack.Navigator>
   );
 }
 
@@ -53,7 +54,7 @@ function RootNavigator() {
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const BottomTab = createBottomTabNavigator<HomeTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
@@ -68,8 +69,8 @@ function BottomTabNavigator() {
         name="Home"
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'Home'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Home',
+          tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -90,8 +91,8 @@ function BottomTabNavigator() {
         name="Search"
         component={SearchScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Search',
+          tabBarIcon: ({ color }) => <Feather name="search" size={24} color={color} />,
         }}
       />
 
@@ -99,17 +100,17 @@ function BottomTabNavigator() {
         name="Mylist"
         component={MylistScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Mylist',
+          tabBarIcon: ({ color }) => <FontAwesome name="list-alt" size={24} color={color} />,
         }}
       />
 
       <BottomTab.Screen
-        name="Search"
+        name="More"
         component={MoreScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'More',
+          tabBarIcon: ({ color }) => <MaterialIcons name="read-more" size={24} color={color}/>,
         }}
       />
     </BottomTab.Navigator>
