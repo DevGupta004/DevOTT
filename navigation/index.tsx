@@ -14,7 +14,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreens';
 import SearchScreen from '../screens/MylistScreen';
 import MylistScreen from '../screens/MylistScreen';
 import MoreScreen from '../screens/MoreScreen';
@@ -41,7 +41,7 @@ const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 function RootNavigator() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <HomeStack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <HomeStack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <HomeStack.Group screenOptions={{ presentation: 'modal' }}>
         <HomeStack.Screen name="Modal" component={ModalScreen} />
@@ -70,7 +70,7 @@ function BottomTabNavigator() {
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'Home'>) => ({
           title: 'Home',
-          tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color={color} style={{margin: 8}} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}

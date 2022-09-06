@@ -17,22 +17,22 @@ const linking: LinkingOptions<HomeStackParamList> = {
         screens: {
           Home: {
             screens: {
-              TabOneScreen: 'one',
+              HomeScreen: 'Home',
             },
           },
           Search: {
             screens: {
-              TabTwoScreen: 'two',
+              SearchScreen: 'Search',
             },
           },
           Mylist: {
             screens: {
-              TabTwoScreen: 'two',
+              MylistScreen: 'Mylist',
             },
           },
           More: {
             screens: {
-              TabTwoScreen: 'two',
+              MoreScreen: 'More',
             },
           },
         },
