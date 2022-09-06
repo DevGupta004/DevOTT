@@ -10,7 +10,6 @@ const Style = StyleSheet.create({
         title: {
           fontSize: 20,
           fontWeight: 'bold',
-          color: '#000000',
         },
         image: {
             width: 150,
